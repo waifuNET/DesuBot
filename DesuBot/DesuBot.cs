@@ -12,6 +12,7 @@ using VkNet.Model.RequestParams;
 using VkNet.Enums.SafetyEnums;
 using System.Drawing;
 using System.Threading;
+using Microsoft.Win32;
 
 namespace DesuBot
 {
@@ -33,11 +34,33 @@ namespace DesuBot
         static string token;
         static string ip;
 
+        static bool AutostartValue = false;
+
         private void Form1_Load(object sender, EventArgs e)
         {
             if (File.Exists(logIpass)) //Загрузка сохранения json, кол-во файлов в папке.
-            {           
+            {
                 ReadJson();
+                AutoPostStop.Enabled = false;
+                if (AutostartValue)
+                {
+                    this.ShowInTaskbar = false;
+                    this.WindowState = FormWindowState.Minimized;
+                    this.FormBorderStyle = FormBorderStyle.SizableToolWindow;
+
+                    notifyIcon1.Icon = this.Icon;
+                    notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
+                    notifyIcon1.BalloonTipText = "DesuBot работает в автоматическом режиме. Работа начнётся через 5 минут.";
+                    notifyIcon1.BalloonTipTitle = "DesuBot";
+                    notifyIcon1.ShowBalloonTip(12);
+
+                    AutoPostStop.Enabled = true;
+                }
+                else
+                {
+                    this.WindowState = FormWindowState.Normal;
+                    this.FormBorderStyle = FormBorderStyle.Sizable;
+                }
                 try
                 {
                     label11.Text = "Количество вайлов в папке: " + Directory.GetFiles(patchToPublic.Text).Length;
@@ -51,6 +74,12 @@ namespace DesuBot
                 if (ip != nowIP)
                 {
                     ip = nowIP;
+                    if (AutostartValue)
+                        Auth();
+                }
+                else if (AutostartValue == true && ip == nowIP)
+                {
+                    Auth();
                 }
                 else
                 {
@@ -60,7 +89,10 @@ namespace DesuBot
                         {
                             AccessToken = token
                         });
-                        MessageBox.Show("Успешная авторизация через токен.");
+                        if (AutostartValue)
+                            timertoautopost.Enabled = true;
+                        else
+                            MessageBox.Show("Успешная авторизация через токен.");
                         autch = true;
                         ButtonLogin.BackColor = Color.Lime;
                     }
@@ -68,7 +100,10 @@ namespace DesuBot
                     {
                         autch = false;
                         ButtonLogin.BackColor = Color.Red;
-                        MessageBox.Show("Авторизация через токен не удалась.");
+                        if (AutostartValue)
+                            Auth();
+                        else
+                            MessageBox.Show("Авторизация через токен не удалась.");
                     }
                 }
             }
@@ -79,32 +114,51 @@ namespace DesuBot
         {
             try
             {
-                vkapi.Authorize(new ApiAuthParams
+                if (AutostartValue)
                 {
-                    ApplicationId = appID,
-                    Login = LoginBox.Text,
-                    Password = PasswordBox.Text,
-                    Settings = settings,
-                    TwoFactorAuthorization = () =>
+                    vkapi.Authorize(new ApiAuthParams
                     {
-                        //Interaction.InputBox("Проверка на двухфакторную аутентификацию." + Environment.NewLine + "Если нет двухфакторной аутентификации нажмите «ОК», или же «Отмена»." + Environment.NewLine  + "Если у вас стоит двухфакторная аутентификация введите код:");
-                        
-                        using (Autch Autch = new Autch())
+                        ApplicationId = appID,
+                        Login = LoginBox.Text,
+                        Password = PasswordBox.Text,
+                        Settings = settings
+                    });
+                    autch = true;
+                    token = vkapi.Token;
+                    WriteJson();
+                    ButtonLogin.BackColor = Color.Lime;
+                    timertoautopost.Enabled = true;
+                }
+                else
+                {
+                    vkapi.Authorize(new ApiAuthParams
+                    {
+                        ApplicationId = appID,
+                        Login = LoginBox.Text,
+                        Password = PasswordBox.Text,
+                        Settings = settings,
+                        TwoFactorAuthorization = () =>
                         {
-                            if (Autch.ShowDialog() == DialogResult.OK)
+                            //Interaction.InputBox("Проверка на двухфакторную аутентификацию." + Environment.NewLine + "Если нет двухфакторной аутентификации нажмите «ОК», или же «Отмена»." + Environment.NewLine  + "Если у вас стоит двухфакторная аутентификация введите код:");
+
+                            using (Autch Autch = new Autch())
                             {
-                                TwoFactorAuthorizationResult = Autch.TheValue;
+                                if (Autch.ShowDialog() == DialogResult.OK)
+                                {
+                                    TwoFactorAuthorizationResult = Autch.TheValue;
+                                }
                             }
+                            return TwoFactorAuthorizationResult;
                         }
-                        return TwoFactorAuthorizationResult;
-                    }
-                });
-                MessageBox.Show("Успешная авторизация.");
-                autch = true;
-                token = vkapi.Token;
-                WriteJson();
-                ButtonLogin.BackColor = Color.Lime;
+                    });
+                    MessageBox.Show("Успешная авторизация.");
+                    autch = true;
+                    token = vkapi.Token;
+                    WriteJson();
+                    ButtonLogin.BackColor = Color.Lime;
+                }
                 return true;
+
             }
             catch
             {
@@ -114,6 +168,7 @@ namespace DesuBot
                 return false;
             }
         }
+
         class Item //Переменные для сохранения в json
         {
             public string LoginT { get; set; }
@@ -129,6 +184,7 @@ namespace DesuBot
             public string PostSpace { get; set; }
             public string Token { get; set; }
             public string Ip { get; set; }
+            public bool AutostartValue { get; set; }
         }
 
         static int hour;
@@ -208,79 +264,96 @@ namespace DesuBot
                 Filter = WallFilter.Postponed,
             });
             ulong CoutPosts = 0;
-            BeginInvoke(new Action(() => CoutPosts = ulong.Parse(CoutPost.Text)));
-            if ((CoutPosts + vkpost.TotalCount) <= 150)
+            if (!AutostartValue)
+                CoutPosts = ulong.Parse(CoutPost.Text);
+            else
+                CoutPosts = 150 - vkpost.TotalCount;
+            if ((int)CoutPosts > Directory.GetFiles(patchToPublic.Text).Length)
             {
-                for (int i = 0; i < (int)CoutPosts; i++)
-                { //Сколько будет постов
-                    Time();
-
-                    DateTime datenow = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, 00);
-                    DateTime date = new DateTime(year, month, day, hour, minute, 00);
-
-                    if (date < datenow)
-                    {
-                        MessageBox.Show("Мы не можем отправлять посты в прошлое.");
-                    }
-
-                    GetFile();
-                    groupid = int.Parse(WallId.Text);
-
-                    var ownerid = vkapi.Users.Get(new long[] { });
-
-                    var wc = new WebClient(); //Создание web клиента
-                    var response = Encoding.ASCII.GetString(wc.UploadFile(vkapi.Photo.GetWallUploadServer(groupid).UploadUrl, file[0])); //Загрузка файла на сервера вк
-                    var photos = vkapi.Photo.SaveWallPhoto(response: response, userId: (ulong)ownerid[0].Id, groupId: (ulong)groupid);
-
-                    try
-                    {
-                        var post = vkapi.Wall.Post(new WallPostParams //Создание поста
-                        {
-                            OwnerId = -int.Parse(WallId.Text),
-                            FromGroup = true,
-                            Message = Hesh.Text,
-                            Attachments = photos,
-                            PublishDate = new DateTime(year, month, day, hour, minute, 0)
-                        });
-                        filemove = true;
-                    }
-
-                    catch (Exception ex)
-                    {
-                        if (ex is VkNet.Exception.PostLimitException)
-                        {
-                            MessageBox.Show(date + " : Возможно в данное время уже запланирован пост или вы достигли лимита 150 постов в отложенных записях. error: P1");
-                            this.Close();
-                        }
-                        if (ex is VkNet.Exception.CaptchaNeededException cap)
-                        {
-                            csid = cap.Sid;
-                            captchaUrl = cap.Img.AbsoluteUri;
-                            using (Captcha captcha = new Captcha())
-                            {
-                                captcha.Owner = this;
-                                if (captcha.ShowDialog() == DialogResult.OK)
-                                {
-                                    captchaKey = captcha.TheValue;
-                                }
-                            }
-                        }
-                        System.Windows.Forms.Application.Exit();
-                    }
-
-                    if (filemove)
-                    {
-                        File.Move(file[0], patchPublic.Text + @"\" + DateTime.Now.Hour + "." + DateTime.Now.Minute + "." + DateTime.Now.Second + "_" + DateTime.Now.Day + "." + DateTime.Now.Month + "." + DateTime.Now.Year + "_" + Path.GetFileName(file[0])); //Перемещение файла в папку после загрузки
-                        WriteJson(); //Сохраняем переменные json
-                        progressBar.Value++;
-                    }
-                }
+                this.WindowState = FormWindowState.Normal;
+                MessageBox.Show("В папке всего: " + Directory.GetFiles(patchToPublic.Text).Length + ", а не " + CoutPosts + " поста.");
             }
             else
             {
-                MessageBox.Show("В отложенные записи нельзя добавить больше 150 постов.");
+                if ((CoutPosts + vkpost.TotalCount) <= 150)
+                {
+                    if (AutostartValue)
+                        progressBar.Maximum = (int)CoutPosts;
+                    for (int i = 0; i < (int)CoutPosts; i++) //Сколько будет постов
+                    {
+                        Time();
+
+                        DateTime datenow = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, 00);
+                        DateTime date = new DateTime(year, month, day, hour, minute, 00);
+
+                        if (date < datenow)
+                        {
+                            if (AutostartValue)
+                                this.WindowState = FormWindowState.Normal;
+                            MessageBox.Show("Мы не можем отправлять посты в прошлое.");
+                        }
+
+                        GetFile();
+                        groupid = int.Parse(WallId.Text);
+
+                        var ownerid = vkapi.Users.Get(new long[] { });
+
+                        var wc = new WebClient(); //Создание web клиента
+                        var response = Encoding.ASCII.GetString(wc.UploadFile(vkapi.Photo.GetWallUploadServer(groupid).UploadUrl, file[0])); //Загрузка файла на сервера вк
+                        var photos = vkapi.Photo.SaveWallPhoto(response: response, userId: (ulong)ownerid[0].Id, groupId: (ulong)groupid);
+                        try
+                        {
+                            var post = vkapi.Wall.Post(new WallPostParams //Создание поста
+                            {
+                                OwnerId = -int.Parse(WallId.Text),
+                                FromGroup = true,
+                                Message = Hesh.Text,
+                                Attachments = photos,
+                                PublishDate = new DateTime(year, month, day, hour, minute, 0)
+                            });
+                            filemove = true;
+                        }
+
+                        catch (Exception ex)
+                        {
+                            if (ex is VkNet.Exception.PostLimitException)
+                            {
+                                if (AutostartValue)
+                                    this.WindowState = FormWindowState.Normal;
+                                MessageBox.Show(date + " : Возможно в данное время уже запланирован пост или вы достигли лимита 150 постов в отложенных записях. error: P1");
+                                this.Close();
+                            }
+                            if (ex is VkNet.Exception.CaptchaNeededException cap)
+                            {
+                                csid = cap.Sid;
+                                captchaUrl = cap.Img.AbsoluteUri;
+                                using (Captcha captcha = new Captcha())
+                                {
+                                    captcha.Owner = this;
+                                    if (captcha.ShowDialog() == DialogResult.OK)
+                                    {
+                                        captchaKey = captcha.TheValue;
+                                    }
+                                }
+                            }
+                            System.Windows.Forms.Application.Exit();
+                        }
+
+                        if (filemove)
+                        {
+                            File.Move(file[0], patchPublic.Text + @"\" + DateTime.Now.Hour + "." + DateTime.Now.Minute + "." + DateTime.Now.Second + "_" + DateTime.Now.Day + "." + DateTime.Now.Month + "." + DateTime.Now.Year + "_" + Path.GetFileName(file[0])); //Перемещение файла в папку после загрузки
+                            WriteJson(); //Сохраняем переменные json
+                            progressBar.Value++;
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("В отложенные записи нельзя добавить больше 150 постов.");
+                }
             }
         }
+
         public void WriteJson() //Сохранение json
         {
             try
@@ -299,6 +372,7 @@ namespace DesuBot
                 item1.PostSpace = SpaseTime.Text;
                 item1.Token = token;
                 item1.Ip = ip;
+                item1.AutostartValue = AutostartValue;
                 Item item = item1;
                 using (StreamWriter writer = File.CreateText(logIpass))
                 {
@@ -347,6 +421,7 @@ namespace DesuBot
                     time2.Text = item2.Min;
                     token = item2.Token;
                     ip = item2.Ip;
+                    AutostartValue = item2.AutostartValue;
                     reader.Close();
                     LoginBox.Text = item2.LoginT;
                     PasswordBox.Text = item2.PassT;
@@ -365,7 +440,7 @@ namespace DesuBot
         {
             file.Clear();
             listBoxfile.Items.Clear();
-            for(int i = 0; i < Directory.GetFiles(patchToPublic.Text).Length; i++)
+            for (int i = 0; i < Directory.GetFiles(patchToPublic.Text).Length; i++)
             {
                 file.Add(Directory.GetFiles(patchToPublic.Text)[i]);
                 listBoxfile.Items.Add(Path.GetFileName(file[i]));
@@ -396,7 +471,7 @@ namespace DesuBot
                         if (Directory.Exists(patchPublic.Text))
                         {
                             if (int.Parse(CoutPost.Text) > Directory.GetFiles(patchToPublic.Text).Length)
-                                MessageBox.Show("В папке всего: " + Directory.GetFiles(patchToPublic.Text).Length + ", а не " + int.Parse(CoutPost.Text) + "поста.");
+                                MessageBox.Show("В папке всего: " + Directory.GetFiles(patchToPublic.Text).Length + ", а не " + int.Parse(CoutPost.Text) + " поста.");
                             else
                             {
                                 if (int.Parse(CoutPost.Text) > 0)
@@ -405,7 +480,7 @@ namespace DesuBot
                                     //new Thread(() =>
                                     //{
                                     //    Thread.CurrentThread.IsBackground = true;
-                                        Post();
+                                    Post();
                                     //}).Start();                                  
                                 }
                                 else
@@ -425,6 +500,43 @@ namespace DesuBot
                 MessageBox.Show("Вы не авторизовались!");
         }
 
+        public void AutoPost()
+        {
+            //MessageBox.Show("Автоматическая авторизация прошла успешна");
+            progressBar.Value = 0;
+            Post();
+            System.Windows.Forms.Application.Exit();
+        }
+
+        const string name = "DesuBot";
+        public bool SetAutorunValue(bool autorun)
+        {
+            string ExePath = System.Windows.Forms.Application.ExecutablePath;
+            RegistryKey reg;
+            reg = Registry.CurrentUser.CreateSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\");
+            try
+            {
+                if (autorun)
+                {
+                    reg.SetValue(name, ExePath);
+                    MessageBox.Show(name + " добавлен в автозагрузку.");
+                }
+                else
+                {
+                    reg.DeleteValue(name);
+                    MessageBox.Show(name + " убран из автозагрузки.");
+                }
+
+                reg.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Ошибка SAV: " + e.ToString());
+                return false;
+            }
+            return true;
+        }
+
         private void Login_Click(object sender, EventArgs e)
         {
             //string Url = "https://scchat.000webhostapp.com/Command.php";
@@ -437,34 +549,49 @@ namespace DesuBot
             //srMAIN.Close();
         }
 
-        private void WallId_TextChanged(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-
+            AutostartValue = true;
+            WriteJson();
+            SetAutorunValue(true);
         }
 
-        private void label9_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-
+            AutostartValue = false;
+            WriteJson();
+            SetAutorunValue(false);
         }
 
-        private void PasswordBox_TextChanged(object sender, EventArgs e)
+        private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
         {
-
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            this.WindowState = FormWindowState.Normal;
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void AutoPostStop_Click(object sender, EventArgs e)
         {
-
+            timertoautopost.Enabled = false;
+            AutoPostStop.Enabled = false;
         }
 
-        private void LoginBox_TextChanged(object sender, EventArgs e)
+        int time = 0;
+        private void timertoautopost_Tick(object sender, EventArgs e)
         {
+            if (time < 300)
+                time++;
+            else
+            {
+                if (AutostartValue)
+                {
+                    timertoautopost.Enabled = false;
+                    AutoPostStop.Enabled = false;
 
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
+                    AutoPost();
+                }
+                else
+                    timertoautopost.Enabled = false;
+            }
         }
     }
 }

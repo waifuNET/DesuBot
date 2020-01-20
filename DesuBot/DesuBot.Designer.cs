@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DesuBot));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -65,6 +66,11 @@
             this.Hesh = new System.Windows.Forms.RichTextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.AutoPostStop = new System.Windows.Forms.Button();
+            this.timertoautopost = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,7 +85,6 @@
             this.label1.Size = new System.Drawing.Size(50, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Login";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -92,7 +97,6 @@
             this.label2.Size = new System.Drawing.Size(92, 24);
             this.label2.TabIndex = 1;
             this.label2.Text = "Password";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // LoginBox
             // 
@@ -102,7 +106,6 @@
             this.LoginBox.Size = new System.Drawing.Size(134, 21);
             this.LoginBox.TabIndex = 3;
             this.LoginBox.Text = "";
-            this.LoginBox.TextChanged += new System.EventHandler(this.LoginBox_TextChanged);
             // 
             // PasswordBox
             // 
@@ -112,7 +115,6 @@
             this.PasswordBox.Size = new System.Drawing.Size(134, 21);
             this.PasswordBox.TabIndex = 4;
             this.PasswordBox.Text = "";
-            this.PasswordBox.TextChanged += new System.EventHandler(this.PasswordBox_TextChanged);
             // 
             // ButtonLogin
             // 
@@ -276,7 +278,6 @@
             this.WallId.Size = new System.Drawing.Size(134, 21);
             this.WallId.TabIndex = 20;
             this.WallId.Text = "";
-            this.WallId.TextChanged += new System.EventHandler(this.WallId_TextChanged);
             // 
             // label9
             // 
@@ -289,7 +290,6 @@
             this.label9.Size = new System.Drawing.Size(89, 25);
             this.label9.TabIndex = 21;
             this.label9.Text = "ID стены";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // Saves
             // 
@@ -473,6 +473,58 @@
             this.pictureBox1.TabIndex = 38;
             this.pictureBox1.TabStop = false;
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.White;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(152, 412);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(152, 23);
+            this.button1.TabIndex = 39;
+            this.button1.Text = "Добавить в автозагрузку";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.White;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(152, 441);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(152, 23);
+            this.button2.TabIndex = 40;
+            this.button2.Text = "Убрать из автозагрузки";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.notifyIcon1.BalloonTipText = "Автоматический режим.";
+            this.notifyIcon1.BalloonTipTitle = "DesuBot";
+            this.notifyIcon1.Text = "DesuBot";
+            this.notifyIcon1.Visible = true;
+            this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseClick);
+            // 
+            // AutoPostStop
+            // 
+            this.AutoPostStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.AutoPostStop.BackColor = System.Drawing.Color.White;
+            this.AutoPostStop.Cursor = System.Windows.Forms.Cursors.Default;
+            this.AutoPostStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AutoPostStop.Location = new System.Drawing.Point(492, 212);
+            this.AutoPostStop.Name = "AutoPostStop";
+            this.AutoPostStop.Size = new System.Drawing.Size(216, 23);
+            this.AutoPostStop.TabIndex = 41;
+            this.AutoPostStop.Text = "Остановить автоматический режим";
+            this.AutoPostStop.UseVisualStyleBackColor = false;
+            this.AutoPostStop.Click += new System.EventHandler(this.AutoPostStop_Click);
+            // 
+            // timertoautopost
+            // 
+            this.timertoautopost.Interval = 1000;
+            this.timertoautopost.Tick += new System.EventHandler(this.timertoautopost_Tick);
+            // 
             // DesuBot
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -480,6 +532,9 @@
             this.BackgroundImage = global::DesuBot.Properties.Resources.bg;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(846, 476);
+            this.Controls.Add(this.AutoPostStop);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.Hesh);
@@ -516,10 +571,11 @@
             this.Controls.Add(this.LoginBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MaximizeBox = false;
             this.Name = "DesuBot";
             this.Text = "DesuBot";
+            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -565,6 +621,11 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.PictureBox pictureBox1;
         public System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.Button AutoPostStop;
+        private System.Windows.Forms.Timer timertoautopost;
     }
 }
 

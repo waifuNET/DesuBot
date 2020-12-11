@@ -57,12 +57,6 @@
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.label11 = new System.Windows.Forms.Label();
             this.listBoxfile = new System.Windows.Forms.ListBox();
-            this.Login = new System.Windows.Forms.Button();
-            this.BoxPassword = new System.Windows.Forms.RichTextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.BoxLogin = new System.Windows.Forms.RichTextBox();
-            this.label14 = new System.Windows.Forms.Label();
             this.Hesh = new System.Windows.Forms.RichTextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -71,6 +65,8 @@
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.AutoPostStop = new System.Windows.Forms.Button();
             this.timertoautopost = new System.Windows.Forms.Timer(this.components);
+            this.textboxImageInPost = new System.Windows.Forms.RichTextBox();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -181,7 +177,7 @@
             this.data1.Name = "data1";
             this.data1.Size = new System.Drawing.Size(39, 21);
             this.data1.TabIndex = 10;
-            this.data1.Text = "01";
+            this.data1.Text = "11";
             // 
             // label5
             // 
@@ -203,7 +199,7 @@
             this.data2.Name = "data2";
             this.data2.Size = new System.Drawing.Size(39, 21);
             this.data2.TabIndex = 12;
-            this.data2.Text = "05";
+            this.data2.Text = "12";
             // 
             // data3
             // 
@@ -213,7 +209,7 @@
             this.data3.Name = "data3";
             this.data3.Size = new System.Drawing.Size(41, 21);
             this.data3.TabIndex = 13;
-            this.data3.Text = "2019";
+            this.data3.Text = "2020";
             // 
             // label6
             // 
@@ -235,7 +231,7 @@
             this.time1.Name = "time1";
             this.time1.Size = new System.Drawing.Size(39, 21);
             this.time1.TabIndex = 15;
-            this.time1.Text = "16";
+            this.time1.Text = "13";
             // 
             // time2
             // 
@@ -308,7 +304,7 @@
             // 
             this.Start.BackColor = System.Drawing.Color.White;
             this.Start.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Start.Location = new System.Drawing.Point(756, 212);
+            this.Start.Location = new System.Drawing.Point(756, 233);
             this.Start.Name = "Start";
             this.Start.Size = new System.Drawing.Size(75, 23);
             this.Start.TabIndex = 23;
@@ -322,7 +318,7 @@
             this.label10.BackColor = System.Drawing.Color.Transparent;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label10.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label10.Location = new System.Drawing.Point(604, 154);
+            this.label10.Location = new System.Drawing.Point(607, 177);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(179, 20);
             this.label10.TabIndex = 25;
@@ -332,7 +328,7 @@
             // 
             this.CoutPost.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.CoutPost.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CoutPost.Location = new System.Drawing.Point(792, 154);
+            this.CoutPost.Location = new System.Drawing.Point(792, 176);
             this.CoutPost.Name = "CoutPost";
             this.CoutPost.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Horizontal;
             this.CoutPost.Size = new System.Drawing.Size(39, 21);
@@ -341,10 +337,10 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(198, 181);
+            this.progressBar.Location = new System.Drawing.Point(198, 203);
             this.progressBar.Name = "progressBar";
             this.progressBar.RightToLeftLayout = true;
-            this.progressBar.Size = new System.Drawing.Size(636, 21);
+            this.progressBar.Size = new System.Drawing.Size(633, 21);
             this.progressBar.TabIndex = 27;
             // 
             // label11
@@ -353,11 +349,11 @@
             this.label11.BackColor = System.Drawing.Color.Transparent;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label11.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label11.Location = new System.Drawing.Point(191, 215);
+            this.label11.Location = new System.Drawing.Point(195, 233);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(255, 20);
+            this.label11.Size = new System.Drawing.Size(261, 20);
             this.label11.TabIndex = 28;
-            this.label11.Text = "Количество вайлов в папке: ";
+            this.label11.Text = "Количество файлов в папке: ";
             // 
             // listBoxfile
             // 
@@ -368,84 +364,13 @@
             this.listBoxfile.Size = new System.Drawing.Size(134, 247);
             this.listBoxfile.TabIndex = 29;
             // 
-            // Login
-            // 
-            this.Login.Enabled = false;
-            this.Login.Location = new System.Drawing.Point(152, 436);
-            this.Login.Name = "Login";
-            this.Login.Size = new System.Drawing.Size(140, 23);
-            this.Login.TabIndex = 34;
-            this.Login.Text = "Login";
-            this.Login.UseVisualStyleBackColor = true;
-            this.Login.Visible = false;
-            this.Login.Click += new System.EventHandler(this.Login_Click);
-            // 
-            // BoxPassword
-            // 
-            this.BoxPassword.Enabled = false;
-            this.BoxPassword.Location = new System.Drawing.Point(152, 406);
-            this.BoxPassword.Name = "BoxPassword";
-            this.BoxPassword.Size = new System.Drawing.Size(140, 24);
-            this.BoxPassword.TabIndex = 33;
-            this.BoxPassword.Text = "";
-            this.BoxPassword.Visible = false;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.BackColor = System.Drawing.Color.Transparent;
-            this.label12.Enabled = false;
-            this.label12.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label12.Location = new System.Drawing.Point(196, 390);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(53, 13);
-            this.label12.TabIndex = 32;
-            this.label12.Text = "Password";
-            this.label12.Visible = false;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.BackColor = System.Drawing.Color.Transparent;
-            this.label13.Enabled = false;
-            this.label13.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label13.Location = new System.Drawing.Point(206, 347);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(33, 13);
-            this.label13.TabIndex = 31;
-            this.label13.Text = "Login";
-            this.label13.Visible = false;
-            // 
-            // BoxLogin
-            // 
-            this.BoxLogin.Enabled = false;
-            this.BoxLogin.Location = new System.Drawing.Point(152, 363);
-            this.BoxLogin.Name = "BoxLogin";
-            this.BoxLogin.Size = new System.Drawing.Size(140, 24);
-            this.BoxLogin.TabIndex = 30;
-            this.BoxLogin.Text = "";
-            this.BoxLogin.Visible = false;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.BackColor = System.Drawing.Color.Transparent;
-            this.label14.Enabled = false;
-            this.label14.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label14.Location = new System.Drawing.Point(298, 366);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(29, 13);
-            this.label14.TabIndex = 35;
-            this.label14.Text = "End:";
-            this.label14.Visible = false;
-            // 
             // Hesh
             // 
             this.Hesh.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Hesh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Hesh.Location = new System.Drawing.Point(362, 154);
+            this.Hesh.Location = new System.Drawing.Point(327, 148);
             this.Hesh.Name = "Hesh";
-            this.Hesh.Size = new System.Drawing.Size(236, 21);
+            this.Hesh.Size = new System.Drawing.Size(281, 21);
             this.Hesh.TabIndex = 36;
             this.Hesh.Text = "";
             // 
@@ -455,7 +380,7 @@
             this.label15.BackColor = System.Drawing.Color.Transparent;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label15.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label15.Location = new System.Drawing.Point(195, 154);
+            this.label15.Location = new System.Drawing.Point(195, 148);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(126, 24);
             this.label15.TabIndex = 37;
@@ -477,7 +402,7 @@
             // 
             this.button1.BackColor = System.Drawing.Color.White;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(152, 412);
+            this.button1.Location = new System.Drawing.Point(152, 411);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(152, 23);
             this.button1.TabIndex = 39;
@@ -489,7 +414,7 @@
             // 
             this.button2.BackColor = System.Drawing.Color.White;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(152, 441);
+            this.button2.Location = new System.Drawing.Point(152, 440);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(152, 23);
             this.button2.TabIndex = 40;
@@ -512,7 +437,7 @@
             this.AutoPostStop.BackColor = System.Drawing.Color.White;
             this.AutoPostStop.Cursor = System.Windows.Forms.Cursors.Default;
             this.AutoPostStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AutoPostStop.Location = new System.Drawing.Point(492, 212);
+            this.AutoPostStop.Location = new System.Drawing.Point(485, 230);
             this.AutoPostStop.Name = "AutoPostStop";
             this.AutoPostStop.Size = new System.Drawing.Size(216, 23);
             this.AutoPostStop.TabIndex = 41;
@@ -525,6 +450,29 @@
             this.timertoautopost.Interval = 1000;
             this.timertoautopost.Tick += new System.EventHandler(this.timertoautopost_Tick);
             // 
+            // textboxImageInPost
+            // 
+            this.textboxImageInPost.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textboxImageInPost.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textboxImageInPost.Location = new System.Drawing.Point(792, 149);
+            this.textboxImageInPost.Name = "textboxImageInPost";
+            this.textboxImageInPost.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Horizontal;
+            this.textboxImageInPost.Size = new System.Drawing.Size(39, 21);
+            this.textboxImageInPost.TabIndex = 43;
+            this.textboxImageInPost.Text = "1";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.Transparent;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label8.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label8.Location = new System.Drawing.Point(614, 150);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(168, 20);
+            this.label8.TabIndex = 42;
+            this.label8.Text = "Вложений в посте:";
+            // 
             // DesuBot
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -532,18 +480,14 @@
             this.BackgroundImage = global::DesuBot.Properties.Resources.bg;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(846, 476);
+            this.Controls.Add(this.textboxImageInPost);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.AutoPostStop);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.Hesh);
-            this.Controls.Add(this.label14);
-            this.Controls.Add(this.Login);
-            this.Controls.Add(this.BoxPassword);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.BoxLogin);
             this.Controls.Add(this.listBoxfile);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.progressBar);
@@ -573,6 +517,8 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(862, 515);
+            this.MinimumSize = new System.Drawing.Size(862, 515);
             this.Name = "DesuBot";
             this.Text = "DesuBot";
             this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
@@ -611,12 +557,6 @@
         private System.Windows.Forms.RichTextBox CoutPost;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ListBox listBoxfile;
-        private System.Windows.Forms.Button Login;
-        private System.Windows.Forms.RichTextBox BoxPassword;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.RichTextBox BoxLogin;
-        private System.Windows.Forms.Label label14;
         private System.Windows.Forms.RichTextBox Hesh;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -626,6 +566,8 @@
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.Button AutoPostStop;
         private System.Windows.Forms.Timer timertoautopost;
+        private System.Windows.Forms.RichTextBox textboxImageInPost;
+        private System.Windows.Forms.Label label8;
     }
 }
 

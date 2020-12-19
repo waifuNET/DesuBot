@@ -89,33 +89,42 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Autch.cs">
+    <Compile Include="Classes\Group.cs" />
+    <Compile Include="Classes\IOClass.cs" />
+    <Compile Include="Classes\Other.cs" />
+    <Compile Include="Classes\ParametersClass.cs" />
+    <Compile Include="Classes\TimeClass.cs" />
+    <Compile Include="Classes\VkApiClass.cs" />
+    <Compile Include="Windows\Autch.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Autch.Designer.cs">
+    <Compile Include="Windows\Autch.Designer.cs">
       <DependentUpon>Autch.cs</DependentUpon>
     </Compile>
-    <Compile Include="Captcha.cs">
+    <Compile Include="Windows\Captcha.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Captcha.Designer.cs">
+    <Compile Include="Windows\Captcha.Designer.cs">
       <DependentUpon>Captcha.cs</DependentUpon>
     </Compile>
-    <Compile Include="DesuBot.cs">
+    <Compile Include="Windows\DesuBot.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DesuBot.Designer.cs">
+    <Compile Include="Windows\DesuBot.Designer.cs">
       <DependentUpon>DesuBot.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Autch.resx">
+    <EmbeddedResource Include="Windows\Autch.resx">
       <DependentUpon>Autch.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Captcha.resx">
+    <EmbeddedResource Include="Windows\Captcha.resx">
       <DependentUpon>Captcha.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DesuBot.resx">
+    <EmbeddedResource Include="Windows\DesuBot.lkt-US.resx">
+      <DependentUpon>DesuBot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\DesuBot.resx">
       <DependentUpon>DesuBot.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -146,7 +155,7 @@
     <None Include="Resources\bg.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DESUBOT.png" />
+    <Content Include="src\DESUBOT.png" />
     <None Include="Resources\DESUBOT.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

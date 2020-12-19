@@ -54,9 +54,7 @@
             this.Start = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.CoutPost = new System.Windows.Forms.RichTextBox();
-            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.label11 = new System.Windows.Forms.Label();
-            this.listBoxfile = new System.Windows.Forms.ListBox();
             this.Hesh = new System.Windows.Forms.RichTextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -67,381 +65,241 @@
             this.timertoautopost = new System.Windows.Forms.Timer(this.components);
             this.textboxImageInPost = new System.Windows.Forms.RichTextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.NewGroupName = new System.Windows.Forms.RichTextBox();
+            this.buttonAdd = new System.Windows.Forms.Button();
+            this.buttonRemove = new System.Windows.Forms.Button();
+            this.groupList = new System.Windows.Forms.ListBox();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.checkBoxAuto = new System.Windows.Forms.CheckBox();
+            this.AutoMaxPost = new System.Windows.Forms.RichTextBox();
+            this.PostsBack = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
+            resources.ApplyResources(this.label1, "label1");
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Adobe Gothic Std B", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(52, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Login";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
+            resources.ApplyResources(this.label2, "label2");
             this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Adobe Fan Heiti Std B", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label2.Location = new System.Drawing.Point(36, 60);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(92, 24);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Password";
             // 
             // LoginBox
             // 
-            this.LoginBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LoginBox.Location = new System.Drawing.Point(12, 36);
+            resources.ApplyResources(this.LoginBox, "LoginBox");
             this.LoginBox.Name = "LoginBox";
-            this.LoginBox.Size = new System.Drawing.Size(134, 21);
-            this.LoginBox.TabIndex = 3;
-            this.LoginBox.Text = "";
             // 
             // PasswordBox
             // 
-            this.PasswordBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.PasswordBox.Location = new System.Drawing.Point(12, 87);
+            resources.ApplyResources(this.PasswordBox, "PasswordBox");
             this.PasswordBox.Name = "PasswordBox";
-            this.PasswordBox.Size = new System.Drawing.Size(134, 21);
-            this.PasswordBox.TabIndex = 4;
-            this.PasswordBox.Text = "";
             // 
             // ButtonLogin
             // 
             this.ButtonLogin.BackColor = System.Drawing.Color.Red;
-            this.ButtonLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ButtonLogin.Location = new System.Drawing.Point(12, 180);
+            resources.ApplyResources(this.ButtonLogin, "ButtonLogin");
             this.ButtonLogin.Name = "ButtonLogin";
-            this.ButtonLogin.Size = new System.Drawing.Size(134, 23);
-            this.ButtonLogin.TabIndex = 5;
-            this.ButtonLogin.Text = "Login";
             this.ButtonLogin.UseVisualStyleBackColor = false;
             this.ButtonLogin.Click += new System.EventHandler(this.ButtonLogin_Click);
             // 
             // patchToPublic
             // 
             this.patchToPublic.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.patchToPublic.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.patchToPublic.Location = new System.Drawing.Point(195, 36);
+            resources.ApplyResources(this.patchToPublic, "patchToPublic");
             this.patchToPublic.Name = "patchToPublic";
-            this.patchToPublic.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Horizontal;
-            this.patchToPublic.Size = new System.Drawing.Size(636, 21);
-            this.patchToPublic.TabIndex = 6;
-            this.patchToPublic.Text = "";
+            this.patchToPublic.TextChanged += new System.EventHandler(this.patchToPublic_TextChanged);
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
+            resources.ApplyResources(this.label3, "label3");
             this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label3.Location = new System.Drawing.Point(445, 9);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(145, 24);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Откуда брать";
             // 
             // patchPublic
             // 
             this.patchPublic.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.patchPublic.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.patchPublic.Location = new System.Drawing.Point(195, 87);
+            resources.ApplyResources(this.patchPublic, "patchPublic");
             this.patchPublic.Name = "patchPublic";
-            this.patchPublic.Size = new System.Drawing.Size(636, 21);
-            this.patchPublic.TabIndex = 8;
-            this.patchPublic.Text = "";
+            this.patchPublic.TextChanged += new System.EventHandler(this.patchPublic_TextChanged);
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
+            resources.ApplyResources(this.label4, "label4");
             this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label4.Location = new System.Drawing.Point(447, 60);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(143, 24);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Куда убирать";
             // 
             // data1
             // 
             this.data1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.data1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.data1.Location = new System.Drawing.Point(362, 118);
+            resources.ApplyResources(this.data1, "data1");
             this.data1.Name = "data1";
-            this.data1.Size = new System.Drawing.Size(39, 21);
-            this.data1.TabIndex = 10;
-            this.data1.Text = "11";
+            this.data1.TextChanged += new System.EventHandler(this.data1_TextChanged);
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
+            resources.ApplyResources(this.label5, "label5");
             this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label5.Location = new System.Drawing.Point(191, 118);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(165, 20);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Начать постить с:";
             // 
             // data2
             // 
             this.data2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.data2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.data2.Location = new System.Drawing.Point(407, 118);
+            resources.ApplyResources(this.data2, "data2");
             this.data2.Name = "data2";
-            this.data2.Size = new System.Drawing.Size(39, 21);
-            this.data2.TabIndex = 12;
-            this.data2.Text = "12";
+            this.data2.TextChanged += new System.EventHandler(this.data2_TextChanged);
             // 
             // data3
             // 
             this.data3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.data3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.data3.Location = new System.Drawing.Point(452, 118);
+            resources.ApplyResources(this.data3, "data3");
             this.data3.Name = "data3";
-            this.data3.Size = new System.Drawing.Size(41, 21);
-            this.data3.TabIndex = 13;
-            this.data3.Text = "2020";
+            this.data3.TextChanged += new System.EventHandler(this.data3_TextChanged);
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
+            resources.ApplyResources(this.label6, "label6");
             this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label6.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label6.Location = new System.Drawing.Point(499, 118);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(68, 20);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "Время:";
             // 
             // time1
             // 
             this.time1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.time1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.time1.Location = new System.Drawing.Point(573, 118);
+            resources.ApplyResources(this.time1, "time1");
             this.time1.Name = "time1";
-            this.time1.Size = new System.Drawing.Size(39, 21);
-            this.time1.TabIndex = 15;
-            this.time1.Text = "13";
+            this.time1.TextChanged += new System.EventHandler(this.time1_TextChanged);
             // 
             // time2
             // 
             this.time2.BackColor = System.Drawing.SystemColors.Window;
             this.time2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.time2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.time2.Location = new System.Drawing.Point(618, 118);
+            resources.ApplyResources(this.time2, "time2");
             this.time2.Name = "time2";
-            this.time2.Size = new System.Drawing.Size(39, 21);
-            this.time2.TabIndex = 16;
-            this.time2.Text = "00";
+            this.time2.TextChanged += new System.EventHandler(this.time2_TextChanged);
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
+            resources.ApplyResources(this.label7, "label7");
             this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label7.ForeColor = System.Drawing.Color.Transparent;
-            this.label7.Location = new System.Drawing.Point(668, 119);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(118, 20);
-            this.label7.TabIndex = 17;
-            this.label7.Text = "Промежуток:";
             // 
             // SpaseTime
             // 
             this.SpaseTime.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.SpaseTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.SpaseTime.Location = new System.Drawing.Point(792, 118);
+            resources.ApplyResources(this.SpaseTime, "SpaseTime");
             this.SpaseTime.Name = "SpaseTime";
-            this.SpaseTime.Size = new System.Drawing.Size(39, 21);
-            this.SpaseTime.TabIndex = 18;
-            this.SpaseTime.Text = "1";
+            this.SpaseTime.TextChanged += new System.EventHandler(this.SpaseTime_TextChanged);
             // 
             // WallId
             // 
-            this.WallId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.WallId.Location = new System.Drawing.Point(12, 148);
+            resources.ApplyResources(this.WallId, "WallId");
             this.WallId.Name = "WallId";
-            this.WallId.Size = new System.Drawing.Size(134, 21);
-            this.WallId.TabIndex = 20;
-            this.WallId.Text = "";
+            this.WallId.TextChanged += new System.EventHandler(this.WallId_TextChanged);
             // 
             // label9
             // 
-            this.label9.AutoSize = true;
+            resources.ApplyResources(this.label9, "label9");
             this.label9.BackColor = System.Drawing.Color.Transparent;
-            this.label9.Font = new System.Drawing.Font("Yu Gothic UI Semibold", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label9.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label9.Location = new System.Drawing.Point(35, 119);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(89, 25);
-            this.label9.TabIndex = 21;
-            this.label9.Text = "ID стены";
             // 
             // Saves
             // 
-            this.Saves.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.Saves, "Saves");
             this.Saves.BackColor = System.Drawing.Color.White;
-            this.Saves.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Saves.Location = new System.Drawing.Point(748, 441);
             this.Saves.Name = "Saves";
-            this.Saves.Size = new System.Drawing.Size(75, 23);
-            this.Saves.TabIndex = 22;
-            this.Saves.Text = "Save";
             this.Saves.UseVisualStyleBackColor = false;
             this.Saves.Click += new System.EventHandler(this.Saves_Click);
             // 
             // Start
             // 
             this.Start.BackColor = System.Drawing.Color.White;
-            this.Start.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Start.Location = new System.Drawing.Point(756, 233);
+            resources.ApplyResources(this.Start, "Start");
             this.Start.Name = "Start";
-            this.Start.Size = new System.Drawing.Size(75, 23);
-            this.Start.TabIndex = 23;
-            this.Start.Text = "Start";
             this.Start.UseVisualStyleBackColor = false;
             this.Start.Click += new System.EventHandler(this.Start_Click);
             // 
             // label10
             // 
-            this.label10.AutoSize = true;
+            resources.ApplyResources(this.label10, "label10");
             this.label10.BackColor = System.Drawing.Color.Transparent;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label10.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label10.Location = new System.Drawing.Point(607, 177);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(179, 20);
-            this.label10.TabIndex = 25;
-            this.label10.Text = "Количество постов:";
             // 
             // CoutPost
             // 
             this.CoutPost.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.CoutPost.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CoutPost.Location = new System.Drawing.Point(792, 176);
+            resources.ApplyResources(this.CoutPost, "CoutPost");
             this.CoutPost.Name = "CoutPost";
-            this.CoutPost.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Horizontal;
-            this.CoutPost.Size = new System.Drawing.Size(39, 21);
-            this.CoutPost.TabIndex = 26;
-            this.CoutPost.Text = "0";
-            // 
-            // progressBar
-            // 
-            this.progressBar.Location = new System.Drawing.Point(198, 203);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.RightToLeftLayout = true;
-            this.progressBar.Size = new System.Drawing.Size(633, 21);
-            this.progressBar.TabIndex = 27;
+            this.CoutPost.TextChanged += new System.EventHandler(this.CoutPost_TextChanged);
             // 
             // label11
             // 
-            this.label11.AutoSize = true;
+            resources.ApplyResources(this.label11, "label11");
             this.label11.BackColor = System.Drawing.Color.Transparent;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label11.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label11.Location = new System.Drawing.Point(195, 233);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(261, 20);
-            this.label11.TabIndex = 28;
-            this.label11.Text = "Количество файлов в папке: ";
-            // 
-            // listBoxfile
-            // 
-            this.listBoxfile.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listBoxfile.FormattingEnabled = true;
-            this.listBoxfile.Location = new System.Drawing.Point(12, 217);
-            this.listBoxfile.Name = "listBoxfile";
-            this.listBoxfile.Size = new System.Drawing.Size(134, 247);
-            this.listBoxfile.TabIndex = 29;
             // 
             // Hesh
             // 
             this.Hesh.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Hesh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Hesh.Location = new System.Drawing.Point(327, 148);
+            resources.ApplyResources(this.Hesh, "Hesh");
             this.Hesh.Name = "Hesh";
-            this.Hesh.Size = new System.Drawing.Size(281, 21);
-            this.Hesh.TabIndex = 36;
-            this.Hesh.Text = "";
+            this.Hesh.TextChanged += new System.EventHandler(this.Hesh_TextChanged);
             // 
             // label15
             // 
-            this.label15.AutoSize = true;
+            resources.ApplyResources(this.label15, "label15");
             this.label15.BackColor = System.Drawing.Color.Transparent;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label15.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label15.Location = new System.Drawing.Point(195, 148);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(126, 24);
-            this.label15.TabIndex = 37;
-            this.label15.Text = "Хештеги/текст:";
             this.label15.UseCompatibleTextRendering = true;
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(439, 254);
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(262, 230);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 38;
             this.pictureBox1.TabStop = false;
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(152, 411);
+            resources.ApplyResources(this.button1, "button1");
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(152, 23);
-            this.button1.TabIndex = 39;
-            this.button1.Text = "Добавить в автозагрузку";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.White;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(152, 440);
+            resources.ApplyResources(this.button2, "button2");
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(152, 23);
-            this.button2.TabIndex = 40;
-            this.button2.Text = "Убрать из автозагрузки";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // notifyIcon1
             // 
             this.notifyIcon1.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            this.notifyIcon1.BalloonTipText = "Автоматический режим.";
-            this.notifyIcon1.BalloonTipTitle = "DesuBot";
-            this.notifyIcon1.Text = "DesuBot";
-            this.notifyIcon1.Visible = true;
+            resources.ApplyResources(this.notifyIcon1, "notifyIcon1");
             this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseClick);
             // 
             // AutoPostStop
             // 
-            this.AutoPostStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.AutoPostStop, "AutoPostStop");
             this.AutoPostStop.BackColor = System.Drawing.Color.White;
             this.AutoPostStop.Cursor = System.Windows.Forms.Cursors.Default;
-            this.AutoPostStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AutoPostStop.Location = new System.Drawing.Point(485, 230);
             this.AutoPostStop.Name = "AutoPostStop";
-            this.AutoPostStop.Size = new System.Drawing.Size(216, 23);
-            this.AutoPostStop.TabIndex = 41;
-            this.AutoPostStop.Text = "Остановить автоматический режим";
             this.AutoPostStop.UseVisualStyleBackColor = false;
             this.AutoPostStop.Click += new System.EventHandler(this.AutoPostStop_Click);
             // 
@@ -453,33 +311,90 @@
             // textboxImageInPost
             // 
             this.textboxImageInPost.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textboxImageInPost.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textboxImageInPost.Location = new System.Drawing.Point(792, 149);
+            resources.ApplyResources(this.textboxImageInPost, "textboxImageInPost");
             this.textboxImageInPost.Name = "textboxImageInPost";
-            this.textboxImageInPost.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Horizontal;
-            this.textboxImageInPost.Size = new System.Drawing.Size(39, 21);
-            this.textboxImageInPost.TabIndex = 43;
-            this.textboxImageInPost.Text = "1";
+            this.textboxImageInPost.TextChanged += new System.EventHandler(this.textboxImageInPost_TextChanged);
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
+            resources.ApplyResources(this.label8, "label8");
             this.label8.BackColor = System.Drawing.Color.Transparent;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label8.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label8.Location = new System.Drawing.Point(614, 150);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(168, 20);
-            this.label8.TabIndex = 42;
-            this.label8.Text = "Вложений в посте:";
+            // 
+            // NewGroupName
+            // 
+            this.NewGroupName.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.NewGroupName, "NewGroupName");
+            this.NewGroupName.Name = "NewGroupName";
+            // 
+            // buttonAdd
+            // 
+            this.buttonAdd.BackColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.buttonAdd, "buttonAdd");
+            this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.UseVisualStyleBackColor = false;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
+            // 
+            // buttonRemove
+            // 
+            this.buttonRemove.BackColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.buttonRemove, "buttonRemove");
+            this.buttonRemove.Name = "buttonRemove";
+            this.buttonRemove.UseVisualStyleBackColor = false;
+            this.buttonRemove.Click += new System.EventHandler(this.buttonRemove_Click);
+            // 
+            // groupList
+            // 
+            this.groupList.FormattingEnabled = true;
+            resources.ApplyResources(this.groupList, "groupList");
+            this.groupList.Name = "groupList";
+            this.groupList.Click += new System.EventHandler(this.groupList_Click);
+            this.groupList.DoubleClick += new System.EventHandler(this.groupList_DoubleClick);
+            // 
+            // progressBar
+            // 
+            resources.ApplyResources(this.progressBar, "progressBar");
+            this.progressBar.Name = "progressBar";
+            // 
+            // checkBoxAuto
+            // 
+            resources.ApplyResources(this.checkBoxAuto, "checkBoxAuto");
+            this.checkBoxAuto.BackColor = System.Drawing.Color.Transparent;
+            this.checkBoxAuto.ForeColor = System.Drawing.Color.White;
+            this.checkBoxAuto.Name = "checkBoxAuto";
+            this.checkBoxAuto.UseVisualStyleBackColor = false;
+            this.checkBoxAuto.CheckedChanged += new System.EventHandler(this.checkBoxAuto_CheckedChanged);
+            // 
+            // AutoMaxPost
+            // 
+            this.AutoMaxPost.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.AutoMaxPost, "AutoMaxPost");
+            this.AutoMaxPost.Name = "AutoMaxPost";
+            this.AutoMaxPost.TextChanged += new System.EventHandler(this.AutoMaxPost_TextChanged);
+            // 
+            // PostsBack
+            // 
+            this.PostsBack.BackColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.PostsBack, "PostsBack");
+            this.PostsBack.Name = "PostsBack";
+            this.PostsBack.UseVisualStyleBackColor = false;
+            this.PostsBack.Click += new System.EventHandler(this.PostsBack_Click);
             // 
             // DesuBot
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImage = global::DesuBot.Properties.Resources.bg;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(846, 476);
+            resources.ApplyResources(this, "$this");
+            this.Controls.Add(this.PostsBack);
+            this.Controls.Add(this.AutoMaxPost);
+            this.Controls.Add(this.checkBoxAuto);
+            this.Controls.Add(this.progressBar);
+            this.Controls.Add(this.groupList);
+            this.Controls.Add(this.buttonRemove);
+            this.Controls.Add(this.NewGroupName);
+            this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.textboxImageInPost);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.AutoPostStop);
@@ -488,9 +403,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.Hesh);
-            this.Controls.Add(this.listBoxfile);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.CoutPost);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.Start);
@@ -517,10 +430,7 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(862, 515);
-            this.MinimumSize = new System.Drawing.Size(862, 515);
             this.Name = "DesuBot";
-            this.Text = "DesuBot";
             this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -556,11 +466,9 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.RichTextBox CoutPost;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ListBox listBoxfile;
         private System.Windows.Forms.RichTextBox Hesh;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.PictureBox pictureBox1;
-        public System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
@@ -568,6 +476,14 @@
         private System.Windows.Forms.Timer timertoautopost;
         private System.Windows.Forms.RichTextBox textboxImageInPost;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.RichTextBox NewGroupName;
+        private System.Windows.Forms.Button buttonAdd;
+        private System.Windows.Forms.Button buttonRemove;
+        private System.Windows.Forms.ListBox groupList;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.CheckBox checkBoxAuto;
+        private System.Windows.Forms.RichTextBox AutoMaxPost;
+        private System.Windows.Forms.Button PostsBack;
     }
 }
 

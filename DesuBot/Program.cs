@@ -11,12 +11,14 @@ namespace DesuBot
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
+        public static DesuBot desuBot;
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new DesuBot());
+            desuBot = new DesuBot();
+            Application.Run(desuBot);
         }
     }
 }

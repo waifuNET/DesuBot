@@ -19,12 +19,12 @@ namespace DesuBot
     private void Captcha_Load(object sender, EventArgs e)
         {
             DesuBot main = this.Owner as DesuBot;
-            if (main != null)
-            {
-                string s = richCaptcha.Text;
-                main.captchaKey = "";
-                pictureBox1.ImageLocation = main.captchaUrl;
-            }
+            //if (main != null)
+            //{
+            //    string s = richCaptcha.Text;
+            //    main.captchaKey = "";
+            //    pictureBox1.ImageLocation = main.captchaUrl;
+            //}
         }
         public string TheValue
         {

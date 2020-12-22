@@ -29,10 +29,14 @@ namespace DesuBot.Classes
         public string captchaUrl;
         public string captchaKey;
 
-        public bool check()
+        public bool check(bool force = false)
         {
             if (ParametersClass.autch)
             {
+                if (ParametersClass.AutostartValue && groupItem.AutostartValue && !force)
+                {
+                    CoutPost = groupItem.MaxPostInAuto;
+                }
                 if (CoutPost > 0)
                 {
                     if (Directory.Exists(groupItem.ForPublic))
@@ -98,15 +102,15 @@ namespace DesuBot.Classes
             }
         }
 
-        public async Task start()
+        public async Task start(bool force = false)
         {
             await Task.Run(() =>
             {
-                Post();
+                Post(force);
             });
         }
 
-        public void Post() //Создание поста
+        public void Post(bool force = false) //Создание поста
         {
             int postMultiply = 0;
             int wallid = 0;
@@ -122,11 +126,18 @@ namespace DesuBot.Classes
                 OwnerId = wallid,
                 Filter = WallFilter.Postponed,
             });
-            if (!ParametersClass.AutostartValue)
+
+            if (!ParametersClass.AutostartValue || force)
                 CoutPosts = (ulong)CoutPost;
             else
-                CoutPosts = (ulong)groupItem.MaxPostInAuto - vkpost.TotalCount;
-            if (CoutPost > 0)
+                CoutPosts = (ulong)groupItem.MaxPostInAuto;
+
+            if (vkpost.TotalCount + (ulong)(CoutPost * groupItem.ImageInPost) > 150)
+            {
+                CoutPosts = 150 - vkpost.TotalCount;
+            }
+
+            if (CoutPosts > 0)
             {
                 if ((int)CoutPosts * postMultiply > FileCount)
                 {

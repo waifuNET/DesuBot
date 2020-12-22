@@ -292,7 +292,7 @@
             // 
             this.notifyIcon1.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             resources.ApplyResources(this.notifyIcon1, "notifyIcon1");
-            this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseClick);
+            this.notifyIcon1.Click += new System.EventHandler(this.notifyIcon1_Click);
             // 
             // AutoPostStop
             // 

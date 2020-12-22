@@ -157,7 +157,6 @@ namespace DesuBot
 
         public static void progressBarPlus(DesuBot desuBot)
         {
-            //desuBot.progressBar.Value += 1;
             desuBot.Invoke(new Action(() => desuBot.progressBar.Value += 1));
         }
 
@@ -192,17 +191,30 @@ namespace DesuBot
             AutoMaxPost.Enabled = status;
         }
 
-        public async Task start()
+        public async Task start(bool force = false)
         {
-            if (ParametersClass.AutostartValue)
-                CoutPost.Text = AutoMaxPost.Text;
             GUIStatus(false);
 
             int max_value = 0;
             for (int i = 0; i < ParametersClass.groups.Count; i++)
             {
-                if (ParametersClass.groups[i].groupItem.groupStatus)
-                    max_value += ParametersClass.groups[i].groupItem.ImageInPost * ParametersClass.groups[i].CoutPost;
+                if (!force)
+                {
+                    if (ParametersClass.groups[i].groupItem.groupStatus && !ParametersClass.AutostartValue)
+                        max_value += ParametersClass.groups[i].groupItem.ImageInPost * ParametersClass.groups[i].CoutPost;
+                    else if (ParametersClass.groups[i].groupItem.groupStatus && ParametersClass.AutostartValue && ParametersClass.groups[i].groupItem.AutostartValue)
+                    {
+                        max_value += ParametersClass.groups[i].groupItem.ImageInPost * ParametersClass.groups[i].groupItem.MaxPostInAuto;
+                    }
+                }
+                else
+                {
+                    timertoautopost.Enabled = false;
+                    AutoPostStop.Enabled = false;
+
+                    if (ParametersClass.groups[i].groupItem.groupStatus)
+                        max_value += ParametersClass.groups[i].groupItem.ImageInPost * ParametersClass.groups[i].CoutPost;
+                }
             }
             progressBar.Minimum = 0;
             progressBar.Maximum = max_value;
@@ -212,10 +224,32 @@ namespace DesuBot
             {
                 if (ParametersClass.groups[i].groupItem.groupStatus)
                 {
-                    if (!ParametersClass.groups[i].check())
+                    if (!force)
                     {
-                        GUIStatus(true);
-                        return;
+                        if (ParametersClass.AutostartValue)
+                        {
+                            if (ParametersClass.groups[i].groupItem.AutostartValue)
+                            {
+                                if (!ParametersClass.groups[i].check())
+                                {
+                                    GUIStatus(true);
+                                    return;
+                                }
+                            }
+                        }
+                        else if (!ParametersClass.groups[i].check())
+                        {
+                            GUIStatus(true);
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        if (!ParametersClass.groups[i].check(true))
+                        {
+                            GUIStatus(true);
+                            return;
+                        }
                     }
                 }
             }
@@ -223,15 +257,35 @@ namespace DesuBot
             for (int i = 0; i < ParametersClass.groups.Count; i++)
             {
                 if (ParametersClass.groups[i].groupItem.groupStatus)
-                    await ParametersClass.groups[i].start();
+                {
+                    if (!force)
+                    {
+                        if (ParametersClass.AutostartValue)
+                        {
+                            if (ParametersClass.groups[i].groupItem.AutostartValue)
+                            {
+                                await ParametersClass.groups[i].start();
+                            }
+                        }
+                        else
+                        {
+                            await ParametersClass.groups[i].start();
+                        }
+                    }
+                    else
+                    {
+                        await ParametersClass.groups[i].start(true);
+                    }
+                }
             }
+
             UpdateGUI();
             GUIStatus(true);
         }
 
         private async void Start_Click(object sender, EventArgs e)
         {
-            await start();
+            await start(true);
         }
 
         public async void AutoPost()
@@ -280,12 +334,6 @@ namespace DesuBot
             ParametersClass.AutostartValue = false;
             IOClass.SaveGlobalJson(LoginBox.Text, PasswordBox.Text);
             SetAutorunValue(false);
-        }
-
-        private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
-        {
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.WindowState = FormWindowState.Normal;
         }
 
         private void AutoPostStop_Click(object sender, EventArgs e)
@@ -547,6 +595,15 @@ namespace DesuBot
         private void PostsBack_Click(object sender, EventArgs e)
         {
             Other.PostsBack(ParametersClass.groups[LastIndex].groupItem.WallId, LastIndex);
+        }
+
+        private void notifyIcon1_Click(object sender, EventArgs e)
+        {
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            this.WindowState = FormWindowState.Normal;
+
+            this.Focus();
+            this.Activate();
         }
     }
 }

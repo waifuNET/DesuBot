@@ -157,7 +157,7 @@ namespace DesuBot
 
         public static void progressBarPlus(DesuBot desuBot)
         {
-            desuBot.Invoke(new Action(() => desuBot.progressBar.Value += 1));
+            desuBot.Invoke(new Action(() => { if (desuBot.progressBar.Value + 1 <= desuBot.progressBar.Maximum) desuBot.progressBar.Value++; }));
         }
 
         public void GUIStatus(bool status)
@@ -194,6 +194,7 @@ namespace DesuBot
         public async Task start(bool force = false)
         {
             GUIStatus(false);
+            progressBar.Minimum = 0;
 
             int max_value = 0;
             for (int i = 0; i < ParametersClass.groups.Count; i++)
@@ -216,7 +217,6 @@ namespace DesuBot
                         max_value += ParametersClass.groups[i].groupItem.ImageInPost * ParametersClass.groups[i].CoutPost;
                 }
             }
-            progressBar.Minimum = 0;
             progressBar.Maximum = max_value;
             progressBar.Value = 0;
 
